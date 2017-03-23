@@ -18,7 +18,7 @@ class nature {
 			$stmt->bind_param("sss", $content, $note, $main);
 			
 			if ($stmt->execute() ){
-				echo "õnnestus";
+				echo "Ãµnnestus";
 			} else {
 				echo "ERROR".$stmt->error;
 			}
@@ -41,7 +41,7 @@ class nature {
 			
 			echo "otsin: ".$q;
 			
-				$stmt = $this->connection->prepare("SELECT id, content, note, main FROM colorNotes WHERE deleted IS NULL AND ( description LIKE ? OR date LIKE ? OR url like ? ) ORDER BY $sort $orderBy");
+				$stmt = $this->connection->prepare("SELECT id, content, note, main FROM colorNotes WHERE deleted IS NULL AND ( content LIKE ? OR note LIKE ? OR main like ? ) ORDER BY $sort $orderBy");
 				$searchWord = "%".$q."%";
 				$stmt->bind_param("sss", $searchWord, $searchWord, $searchWord);
 				
@@ -53,7 +53,7 @@ class nature {
 			$stmt->execute();
 			
 			$results = array();
-			// Tsükli sisu tehake nii mitu korda, mitu rida SQL lausega tuleb
+			// TsÃ¼kli sisu tehake nii mitu korda, mitu rida SQL lausega tuleb
 			while($stmt->fetch()) {
 				//echo $color."<br>";
 				$nature2= new StdClass();
@@ -109,7 +109,7 @@ class nature {
 		
 		if($stmt->execute()){
 			
-			echo "salvestus õnnestus!";
+			echo "salvestus Ãµnnestus!";
 		}
 		
 		$stmt->close();
@@ -124,7 +124,7 @@ class nature {
 		
 		if($stmt->execute()){
 			
-			echo "kustutamine õnnestus!";
+			echo "kustutamine Ãµnnestus!";
 		}
 		
 		$stmt->close();

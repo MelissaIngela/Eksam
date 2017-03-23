@@ -9,35 +9,35 @@
 	$nature = new nature($mysqli);
 	
 	
-	$descriptionError = "*";
+	$contentError = "*";
 		
 	if (isset ($_POST["content"])) {
 			if (empty ($_POST["content"])) {
-				$descriptionError = "*Sisesta laulu märksõnad!";
+				$contentError = "*Sisesta laulu märksõnad!";
 			} else {
-				$description = $_POST["content"];
+				$content = $_POST["content"];
 		}
 		
 	} 
 	
-	$dateError = "*";
+	$noteError = "*";
 	
 	if (isset ($_POST["note"])) {
 			if (empty ($_POST["note"])) {
-				$dateError = "*Sisesta laulu pealkiri!";
+				$noteError = "*Sisesta laulu pealkiri!";
 			} else {
-				$date = $_POST["note"];
+				$note = $_POST["note"];
 		}
 		
 	} 
 	
-	$urlError = "*";
+	$mainError = "*";
 	
 	if (isset ($_POST["main"])) {
 			if (empty ($_POST["main"])) {
-				$urlError = "*Sisesta laulu sõnad!";
+				$mainError = "*Sisesta laulu sõnad!";
 			} else {
-				$url = $_POST["main"];
+				$main = $_POST["main"];
 		}
 		
 	} 
@@ -93,31 +93,34 @@
 		
 ?>
 
-<h1>Data</h1>
+<h1>Laulude andmebaas</h1>
 
 <p>
-	Tere tulemast <a href="user.php"><?=$_SESSION["userEmail"];?></a>!
+	Tere tulemast <a href="user.php"><?=$_SESSION["userEmail"];?></a>! <br><br>
 	<a href="?logout=1">logi välja</a>
 	
 </p>
+<br><br>
 <body>
 	
-		<h1>Salvesta andmed</h1>
+		<h1>Salvesta Laulu andmed</h1>
 		
 		<form method="POST">
-	<input name="content" placeholder="Märksõna" type="text"> <br><br>
-	<input name="note" placeholder="Sõnad" type="text"> <br><br>
-	<input name="main" placeholder="Pealkiri" type="text"> <br><br>
+	<input name="content" placeholder="Laulu Pealkiri" type="text"> <br><br>
+	<input name="note" placeholder=" Laulu Sõnad" type="text"> <br><br>
+	<input name="main" placeholder="märksõnad" type="text"> <br><br>
 	<input type="submit" value="Sisesta andmed">
 </form>
+<br><br>
 		
-		<h2>Arhiiv</h2>
+		<h2>Laulude Arhiiv</h2>
 		
 		<form>
 	<input type="search" name="q" value="<?=$q;?>">
 	<input type="submit" value="Otsi">
 </form>
-
+<br><br>
+<br><br>
 <?php
 	$html = "<table>";
 		
@@ -133,25 +136,25 @@
 				
 			}
 			
-			$orderDescription = "ASC";
+			$orderContent = "ASC";
         if (isset($_GET["order"]) &&
             $_GET["order"] == "ASC" &&
             $_GET["sort"] == "content" ) {
-            $orderDescription = "DESC";
+            $orderContent = "DESC";
         }
 		
-			$orderDate = "ASC";
+			$orderNote = "ASC";
         if (isset($_GET["order"]) &&
             $_GET["order"] == "ASC" &&
             $_GET["sort"] == "note" ) {
-            $orderDate = "DESC";
+            $orderNote = "DESC";
         }
 		
-			$orderUrl = "ASC";
+			$orderMain = "ASC";
         if (isset($_GET["order"]) &&
             $_GET["order"] == "ASC" &&
             $_GET["sort"] == "main" ) {
-            $orderUrl = "DESC";
+            $orderMain = "DESC";
         }
 		
 			$html .= "<th>
@@ -160,18 +163,18 @@
 						</a>
 					 </th>";
 			$html .= "<th>
-						<a href='?q=".$q."&sort=description&order=".$orderContent."'>
-							Märksõna
+						<a href='?q=".$q."&sort=content&order=".$orderContent."'>
+							Laulu Pealkiri
 						</a>
 					 </th>";
 			$html .= "<th>
-						<a href='?q=".$q."&sort=date&order=".$orderNote."'>
-							Sõnad
+						<a href='?q=".$q."&sort=note&order=".$orderNote."'>
+							Laulu Sõnad
 						</a>
 					 </th>";
 			$html .= "<th>
-						<a href='?q=".$q."&sort=url&order=".$orderMain."'>
-							Pealkiri
+						<a href='?q=".$q."&sort=main&order=".$orderMain."'>
+							märksõnad
 						</a>
 					 </th>";
 					 
@@ -184,7 +187,10 @@
 			$html .= "<td>".$n->content."</td>";
 			
 			$html .= "<td>".$n->note."</td>";
-			$html .= "<td><img width='150' src=' ".$n->main." '></td>";
+			
+			
+			$html .= "<td>".$n->main."</td>";
+			
 			 $html .= "<td><a href='edit.php?id=".$n->id."'>Muuda</a></td>";
 			$html .= "</tr>";
 		

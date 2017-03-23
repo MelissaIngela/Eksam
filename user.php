@@ -17,7 +17,7 @@
 	}
 	
 	
-	//kui on ?logout aadressireal siis login v‰lja
+	//kui on ?logout aadressireal siis login v√§lja
 	if (isset($_GET["logout"])) {
 		
 		session_destroy();
@@ -29,7 +29,7 @@
 	if(isset($_SESSION["message"])){
 		$msg = $_SESSION["message"];
 		
-		//kui ¸he n‰itame siis kustuta ‰ra, et p‰rast refreshi ei n‰itaks
+		//kui √ºhe n√§itame siis kustuta √§ra, et p√§rast refreshi ei n√§itaks
 		unset($_SESSION["message"]);
 	}
 	
@@ -58,12 +58,12 @@
 <h1><a href="data.php"> < tagasi</a> Kasutaja leht</h1>
 <?=$msg;?>
 <p>
-	Tere tulemast <?=$_SESSION["userEmail"];?>!
-	<a href="?logout=1">Logi v‰lja</a>
+	Tere tulemast <?=$_SESSION["userEmail"];?>! <br>
+	<a href="?logout=1">Logi v√§lja</a>
 </p>
 
 
-<h2>Salvesta laul</h2>
+<h2>Salvestatud lemmikud laulud </h2>
 <?php
     
     $listHtml = "<ul>";
@@ -92,10 +92,10 @@
 
 
 
-<h2>Kasutaja hobid</h2>
+<h2>Teiste kasutajate lemmikud laulud</h2>
 <form method="POST">
 	
-	<label>Hobi/huviala nimi</label><br>
+	<label>Laulude nimed</label><br>
 	<select name="userInterest" type="text">
         <?php
             

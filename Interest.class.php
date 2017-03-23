@@ -19,7 +19,7 @@ class Interest {
 		$stmt->bind_param("s", $interest);
 		
 		if($stmt->execute()) {
-			echo "salvestamine õnnestus";
+			echo "salvestamine Ãµnnestus";
 		} else {
 		 	echo "ERROR ".$stmt->error;
 		}
@@ -52,7 +52,7 @@ class Interest {
 		$stmt->bind_param("ii", $_SESSION["userId"], $interestid);
 		
 		if($stmt->execute()) {
-			echo "salvestamine õnnestus";
+			echo "salvestamine Ãµnnestus";
 		} else {
 		 	echo "ERROR ".$stmt->error;
 		}
